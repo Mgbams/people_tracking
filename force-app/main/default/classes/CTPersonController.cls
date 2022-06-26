@@ -51,5 +51,30 @@ public with sharing class CTPersonController {
         }
         return null;
     }
+
+    public static Map<String, Integer> getHealthStatusCount() {
+       
+        AggregateResult[] healthStatusCount;
+        Map<String, Integer> healthCountMap = new Map<String, Integer>();
+        
+        if(
+                Person__c.SObjectType.getDescribe().isAccessible() &&
+                Schema.SObjectType.Person__c.fields.Name.isAccessible() 
+        ) {
+                healthStatusCount = [SELECT  Health_Status__c, COUNT(Id) total FROM Person__c GROUP BY Health_Status__c];
+        }
+
+        if (healthStatusCount != null) {
+            for (AggregateResult ar: healthStatusCount) {
+                String healthStatus = String.valueOf(ar.get('Health_status__c'));
+                Integer count = Integer.valueOf(ar.get('total'));
+                healthCountMap.put(healthStatus, count);
+            }
+        } else {
+            return null;
+        }
+        
+        return healthCountMap;
+    }
    
 }
