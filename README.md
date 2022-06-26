@@ -456,30 +456,33 @@ e.g
 2. LAST_N_DAYS:n e.g SELECT Id FROM Account WHERE CreatedDate = LAST_N_DAYS:365
 3. N_DAYS_AGO:n e.g SELECT Id FROM Opportunity WHERE CloseDate = N_DAYS_AGO:25
 
-Relationships in an object
-===========================
+### Relationships in an object
 1. it could be either lookup or master detail relationship.
 To see it click on champs et relations of the child object. under types des donnes, 
 you'll find the type of relationship. click on the name of the relationship to get the child relationship name
 E.g Nom de la relation enfant: Contacts. Then use the child relationship name in a query E.g référence(Account) OR lookup(Account).
 
 Query example of relationship in a PARENT to CHILD Relationship
-==================================================================
+
+```SQL
 SELECT Name, age, (SELECT ContactAddress, Phone FROM Contacts)
 FROM Account
+```
 
 BUT for custom object, you'll have something similar to this:
-SELECT Name, age, (SELECT ContactAddress, Phone FROM Contacts__r)
-FROM Account__c
-LIMITATIONS OF QUERY FROM a PARENT to CHILD Relationship
-========================================================
+
+```SQL
+    SELECT Name, age, (SELECT ContactAddress, Phone FROM Contacts__r)
+    FROM Account__c
+```
+#### LIMITATIONS OF QUERY FROM a PARENT to CHILD Relationship
+
 1. Maximum of 20 objects possible in the query
 2. You can only go one level deeep in making the relationship. i.e There will alwys be one parent.
 A child object cannot be used as a parent to another child component in a parent to child query.
 
 
-Query example of relationship in a CHILD TO PARENT Relationship
-==================================================================
+#### Query example of relationship in a CHILD TO PARENT Relationship
 In this case, we don't focus on the child relationship name(Nom de la relation enfant) 
 but instead on the field name(Nom du champ) e.g School as in the example below.
 CHILD TO PARENT Relationship supports up to 5 levels of parents records.
