@@ -506,7 +506,6 @@ FROM Contact
 ```
 
 **NOTE:** In example 2, Contact is the child of Account and Account is the child of Owner.
-
 BUT FOR A CUSTOM OBJECT, DON'T FORGET TO ADD __r TO THE RELATIONSHIP FIELD NAME 
 
 E.g: 3
@@ -541,7 +540,6 @@ for (Contact con: contacts) {
 }
 ```
 
-
 BINDING VARIABLES IN SOQL
 ===========================
 We use colon(:) while creating a bind variable e.g
@@ -559,7 +557,6 @@ Ex1:
 ```
 
 **NOTE** We can only use Binding variables after the where clause and not for the field names.
-
 
 DYNAMIC SOQL QUERIES
 =====================
@@ -610,7 +607,6 @@ You can visit the below link for more details:
 
 
 ### TYPE CLASS
-
 This helps us replace the new keyword during object instantiation.
 Make sure you type cast the instantiation when you're using Type for object
 instantiation. Example is shown below.
@@ -631,7 +627,6 @@ You can visit the below link for more info:
 [Apex methods](https://developer.salesforce.com/docs/atlas.en-us.apexref.meta/apexref/apex_methods_system_type.htm)
 
 ### LIMITS CLASS
-
 1. getDMLStatements() => returns the number of DML Statements.
 2. getHeapSize() => returns amount of memory(in bytes) that has been used.
 You can check more information in the below link:
