@@ -79,8 +79,9 @@ public with sharing class CTLocationTracingController {
 
                 // add person ids to map set
                 mapOfExistingRecords.get(trace.Location__c).add(trace.Person__c);
+            }
 
-                // loop over new location tracing records
+             // loop over new location tracing records
                 for(Location_Tracing__c traceOp :  newLocationTraces) {
                     // first check for location id
                     // if item found in map, then check for person in set
@@ -89,7 +90,6 @@ public with sharing class CTLocationTracingController {
                             duplicates.add(traceOp);
                         }
                 }
-            }
         }
 
         return duplicates;
