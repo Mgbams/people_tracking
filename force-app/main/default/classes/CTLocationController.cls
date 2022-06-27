@@ -32,7 +32,7 @@ public with sharing class CTLocationController {
         
         if(
                 Location__c.SObjectType.getDescribe().isAccessible() &&
-                Schema.SObjectType.Person__c.fields.Name.isAccessible() 
+                Schema.SObjectType.Location__c.fields.Name.isAccessible() 
         ) {
                 locations = [SELECT Id, Name, Address__c, Pincode__c, Red_Score__c, Status_Update_Date__c, Status__c 
                           FROM Location__c WHERE Id =: locationId ];
@@ -42,5 +42,15 @@ public with sharing class CTLocationController {
             return locations[0];
         }
         return null;
+    }
+
+     public static Map<String, Integer> getStatusCount() {
+        Map<String, Integer> healthCountMap = new  Map<String, Integer>();
+
+        for (AggregateResult ar: [SELECT Status__c, COUNT(Id) total FROM Location__c GROUP BY Status__c]) {
+            healthCountMap.put(String.valueOf(ar.get('Status__c')), Integer.valueOf(ar.get('total')));
+        }
+
+        return healthCountMap;
     }
 }

@@ -709,7 +709,9 @@ for (AggregateResult result: groupedResults ) {
 
 /*OR YOU CAN USE ALIAS FOR THE COLUMN NAMES AS SHOWN BELOW*/
 ==============================================================
-AggregateResult[] groupedResults = [SELECT StageName, AVG(Amount) avgAmount, MAX(Amount) maxAmount, MIN(Amount) minAmount FROM Opportunity];
+AggregateResult[] groupedResults = [SELECT StageName, AVG(Amount) avgAmount, 
+                                    MAX(Amount) maxAmount, MIN(Amount) minAmount 
+                                    FROM Opportunity];
 
 Double avgAmount = Double.valueOf( groupedResults[0].get('avgAmount'));
 Double maxAmount = Double.valueOf( groupedResults[0].get('maxAmount'));
@@ -722,5 +724,35 @@ for (AggregateResult result: groupedResults ) {
 	' Avg Amount: ' + result.get('AvgAmount'));
 }
 ```
+### ADDING ERROR TO TRIGGERS USING THE METHOD addError()
+```sql
+trigger LeadTrigger on Lead (before insert, before update, after update) {
+    for (Lead leadRecord: Trigger.new) {
+        if (String.isBlank(leadRecord.LeadSource)) {
+            leadRecord.LeadSource = 'Other';
+        }
 
+         if (String.isBlank(leadRecord.Industry) && Trigger.isInsert) {
+            leadRecord.addError('The industry field cannot be blank');
+            leadRecord.Industry.addError('The industry field cannot be blank'); // Thrown on the industry field
+        }
+    }
+}
+```
+
+### Trigger Context Variables
+Apex triggers defines implicit variables from System.Trigger class which help you to control your trigger logic. E.g
+1. isInsert, isUpdate, isDelete, isUndelete, isBefore, isAfter
+2. new - List of new versions of records. Available in before insert, after insert, before update, after update, after undelete  e.g
+Trigger.new is same as List<SObject>
+3. newMap - Map of Id and new versions of records. Available in after insert, before update, after update, after undelete. e.g
+Trigger.newMap is same as Map<Id, SObject>
+4. old - List of old versions of records. Available in before update, after update, before delete, after delete  e.g
+Trigger.old is same as List<SObject>
+5. oldMap - Map of Id and old versions of records. Available in before update, after update, before delete, after delete. e.g
+Trigger.oldMap is same as Map<Id, SObject>
+6. isExecuting - Return true if current context for the apex code is trigger
+7. size - The total number of records in a trigger invocation, both old and new.
+8. operationType - Return an enum corresponding to the current operation. Possible values are:
+BEFORE_INSERT, AFTER_INSERT, BEFORE_UPDATE, AFTER_UPDATE,BEFORE_DELETE, AFTER_DELETE, AFTER_UNDELETE, 
 
