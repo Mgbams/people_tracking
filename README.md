@@ -756,3 +756,53 @@ Trigger.oldMap is same as Map<Id, SObject>
 8. operationType - Return an enum corresponding to the current operation. Possible values are:
 BEFORE_INSERT, AFTER_INSERT, BEFORE_UPDATE, AFTER_UPDATE,BEFORE_DELETE, AFTER_DELETE, AFTER_UNDELETE, 
 
+
+## VISUALFORCE
+#### Page Tags
+- <apex:page>
+- <apex:pageMessage>
+- <apex:pageMessages>
+- <apex:pageBlock>
+- <apex:pageBlockTable>
+- <apex:pageBlockButtons>
+- <apex:pageBlockSectionItem>
+
+#### Input Tags
+- <apex:inputsecret>
+- <apex:inputCheckbox>
+- <apex:inputFile>
+- <apex:inputHidden>
+- <apex:inputField>
+- <apex:inputTextarea>
+
+#### Output Tags
+- <apex:outputLink>
+- <apex:outputLabel>
+
+#### Other Tags
+- <apex:column>
+- <apex:tab>
+- <apex:Messages>
+- <apex:panelGrid>
+- <apex:param>
+- <apex:form>
+- <apex:toolbar>
+- <apex:panelBar>
+- <apex:column>
+- <apex:panelGroup>
+- <apex:tabpanel>
+- <apex:toolbarGroup>
+- <apex:panelbarItem>
+- <apex:detail>
+- <apex:repeat>
+
+### SETTING YOUR VISUAL FORCE PAGE AS THE DEFAULT PAGE
+**NOTE** You need to switch to visualforce classic to do this.
+You can visit the link below for more info:
+
+[default visual force page](https://salesforce.stackexchange.com/questions/184044/visualforce-page-as-the-default-layout-of-an-object-standard-custom)
+
+E.g
+<apex:page standardController="Contact" .../>
+And then you can go to Setup > Customize > Contacts > Buttons, Links, and Actions,
+and edit the View button. All users will then see the new Visualforce page when viewing a contact.
